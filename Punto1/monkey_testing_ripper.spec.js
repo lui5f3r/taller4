@@ -81,8 +81,6 @@ function randomEvent(monkeysLeft) {
 
     function comboboxEvent() {
         cy.log("EVENT: combobox event selected")
-
-
         cy.get('select').then($selects => {
             cy.log($selects.length)
             var randomSelect = $selects.get(getRandomInt(0, $selects.length));
