@@ -64,7 +64,6 @@ function randomEvent(monkeysLeft) {
     function textFieldEvent() {
         cy.log("EVENT: textfield  event selected")
         cy.wait(3000);
-
         cy.get('input').then($inputs => {
             cy.log($inputs.length)
             var randomInput = $inputs.get(getRandomInt(0, $inputs.length));
