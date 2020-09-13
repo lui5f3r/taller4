@@ -8,6 +8,7 @@ describe('Wikipedia under monkeys', function () {
     it('visits wikipedia and survives monkeys', function () {
         //cy.visit('https://www.w3schools.com/html/html_forms.asp');
         //cy.visit('https://habitica.com/static/home');
+        //cy.visit('https://semantic-ui.com/modules/dropdown.html')
         cy.visit('https://es.wikipedia.org/wiki/Wikipedia:Portada');
         cy.wait(1000);
         randomEvent(10);
@@ -80,18 +81,17 @@ function randomEvent(monkeysLeft) {
 
     function comboboxEvent() {
         cy.log("EVENT: combobox event selected")
-        cy.get('body').then(($body) => {
-            if ($body.$combos > 0) {
-                cy.get('combobox').then($combos => {
-                    var randomCombobox = $combos.get(getRandomInt(0, $combos.length));
-                    cy.wait(500);
-                    cy.wrap(randomCombobox).click({ force: true });
 
-                });
-            } else {
-                cy.log("Does not exist combobox")
+
+        cy.get('select').then($selects => {
+            cy.log($selects.length)
+            var randomSelect = $selects.get(getRandomInt(0, $selects.length));
+            if (!Cypress.dom.isHidden(randomSelect)) {
+                cy.wait(1000);
+                cy.wrap(randomSelect).click({ force: true })
             }
-        })
+        });
+
     };
 
     function buttonEvent() {
